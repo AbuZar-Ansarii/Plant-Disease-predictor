@@ -66,6 +66,3 @@ This section should describe how the machine learning model was trained.  Includ
 *   **Training Process:** Briefly describe the training process, including hyperparameters, epochs, etc.
 *   **Model Saving:** Explain how the trained model and class names were saved (e.g., using `pickle`).
 
-(If you have a separate notebook or script for training, include instructions on how to run it.)
-
-## File Structure
