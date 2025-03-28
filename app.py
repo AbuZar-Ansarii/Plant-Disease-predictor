@@ -3,7 +3,8 @@ import cv2
 import numpy as np
 import pickle
 from PIL import Image
-
+import gdown
+import os
 
 st.set_page_config(page_title="Plant Disease Predictor", page_icon="🌿", layout="wide")  # Set page title, icon, and layout
 
@@ -50,21 +51,30 @@ st.markdown(
 # Streamlit App Title with Markdown for styling
 st.markdown("<h1 style='text-align: center;'>🌿 Plant Disease Predictor</h1>", unsafe_allow_html=True)
 
+
 # --- Model and Class Names Loading (Improved Error Handling) ---
 model = None
 class_names = None
 
-try:
-    with open("plant_model.pkl", "rb") as f:
-        model = pickle.load(f)
-    st.success("Model loaded successfully!")
-except FileNotFoundError:
-    st.error("Model file not found. Please ensure 'plant_model.pkl' is in the correct directory.")
-except (EOFError, pickle.UnpicklingError):
-    st.error("Model file is corrupted or incomplete. Please retrain your model and save it again.")
-except Exception as e:
-    st.error(f"An unexpected error occurred during model loading: {e}")
-    st.exception(e)
+
+MODEL_FILE_ID = "19pBCaFcxM3xPTC1LoeIExS0_w5t1Y6CD"
+MODEL_PATH = "plant_model.pkl"
+
+
+def download_model():
+    """Downloads the model from Google Drive if it does not exist."""
+    if not os.path.exists(MODEL_PATH):
+        st.warning("Downloading the model... Please wait ⏳")
+        url = f"https://drive.google.com/uc?id={MODEL_FILE_ID}"
+        gdown.download(url, MODEL_PATH, quiet=False)
+        st.success("Model downloaded successfully! ✅")
+
+download_model()
+
+
+with open("plant_model.pkl", "rb") as f:
+    model = pickle.load(f)
+
 
 try:
     with open("class_names.pkl", "rb") as f:
@@ -120,3 +130,4 @@ if uploaded_file is not None:
                 st.subheader(f"Confidence: {confidence_score:.2%}")
 
         st.markdown("< /div>", unsafe_allow_html=True)  # End of container
+        
