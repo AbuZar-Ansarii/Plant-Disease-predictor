@@ -23,7 +23,7 @@ This project aims to provide a simple and accessible tool for identifying plant 
 1.  **Clone the repository:**
 
     ```bash
-    git clone [https://github.com/YOUR_USERNAME/Plant-Disease-Predictor.git](https://www.google.com/search?q=https://github.com/YOUR_USERNAME/Plant-Disease-Predictor.git)  # Replace with your repo URL
+    git clone https://github.com/AbuZar-Ansarii/Plant-Disease-predictor.git
     cd Plant-Disease-Predictor
     ```
 
